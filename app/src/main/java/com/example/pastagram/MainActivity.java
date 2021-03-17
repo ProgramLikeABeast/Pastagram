@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnCaptureImage;
     private ImageView ivPostImage;
     private Button btnSubmit;
+    private Button btnLogOut;
     private File photoFile;
     private String photoFileName="photo.jpg";
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE=42;
@@ -45,10 +46,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        etDescription=findViewById(R.id.etDescription);
-        btnCaptureImage=findViewById(R.id.btnCaptureImage);
-        ivPostImage=findViewById(R.id.ivPostImage);
-        btnSubmit=findViewById(R.id.btnSubmit);
+        btnLogOut = findViewById(R.id.btnLogOut);
+        etDescription = findViewById(R.id.etDescription);
+        btnCaptureImage = findViewById(R.id.btnCaptureImage);
+        ivPostImage = findViewById(R.id.ivPostImage);
+        btnSubmit = findViewById(R.id.btnSubmit);
+
+        btnLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goLoginActivity();
+                ParseUser.logOut();
+            }
+        });
 
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,8 +167,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void done(List<Post> posts, ParseException e) {
                 if (e == null) {
-                    for(Post post : posts){
-                        Log.i(TAG, "Post: "+post.getDescription()+"; User: "+post.getUser().getUsername());
+                    for (Post post : posts) {
+                        Log.i(TAG, "Post: " + post.getDescription() + "; User: " + post.getUser().getUsername());
                     }
                 } else {
                     // Something went wrong.
@@ -166,5 +176,11 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void goLoginActivity() {
+        Intent i = new Intent(this, LoginActivity.class);
+        startActivity(i);
+        finish();
     }
 }

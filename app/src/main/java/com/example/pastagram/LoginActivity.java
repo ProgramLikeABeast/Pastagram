@@ -19,28 +19,37 @@ public class LoginActivity extends AppCompatActivity {
     public static final String TAG = "LoginActivity";
     private TextView etUsername;
     private TextView etPassword;
-    private Button btnLogin;
+    private Button btnLoginOrSignUp;
+    private Button btnToSignUp;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        if (ParseUser.getCurrentUser()!=null){
+        if (ParseUser.getCurrentUser() != null) {
             goMainActivity();
         }
-
-        btnLogin = findViewById(R.id.btnLogin);
+        btnToSignUp = findViewById(R.id.btnToSignUp);
+        btnLoginOrSignUp = findViewById(R.id.btnLogin);
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        btnLoginOrSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.i(TAG, "onClick Login Button");
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
                 loginUser(username, password);
+            }
+        });
+
+        btnToSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i(TAG, "onClick ToSignUp Button");
+                goSignUpActivity();
             }
         });
     }
@@ -67,4 +76,9 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
+    private void goSignUpActivity() {
+        Intent i = new Intent(this, SignUpActivity.class);
+        startActivity(i);
+        finish();
+    }
 }
