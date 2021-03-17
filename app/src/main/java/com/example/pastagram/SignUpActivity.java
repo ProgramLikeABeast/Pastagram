@@ -11,7 +11,6 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
@@ -20,7 +19,7 @@ public class SignUpActivity extends AppCompatActivity {
     public static final String TAG = "SignUpActivity";
     private TextView etUsername;
     private TextView etPassword;
-    private Button btnLoginOrSignup;
+    private Button btnSignUp;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,11 +30,11 @@ public class SignUpActivity extends AppCompatActivity {
         //    goMainActivity();
         //}
 
-        btnLoginOrSignup = findViewById(R.id.btnSignUp);
+        btnSignUp = findViewById(R.id.btnSignUp);
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
 
-        btnLoginOrSignup.setOnClickListener(new View.OnClickListener() {
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.i(TAG, "onClick SignUp Button");
